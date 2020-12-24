@@ -1,9 +1,16 @@
 {
     "name": "neolastics-metadata",
     "version": "0.1.0",
+    "main": "functions/server.js",
+    "scripts": {
+        "build": "netlify-lambda build express",
+    },
     "devDependencies": {},
     "dependencies": {
         "ethers": "^5.0.24",
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "netlify-lambda": "^2.0.2",
+        "nodemon": "^2.0.6",
+        "serverless-http": "^2.6.0"
     }
 }

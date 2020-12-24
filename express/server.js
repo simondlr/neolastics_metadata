@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const router = express.Router();
 const app = express();
 
@@ -50,6 +51,7 @@ router.get('/:id', generateMetadata);
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use('/metadata', router)
+app.use('/.netlify/functions/metadata', router)
 
 module.exports = app
+module.exports.handler = serverless(app);
