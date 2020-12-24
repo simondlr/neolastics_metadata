@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "main": "functions/server.js",
     "scripts": {
-        "build": "netlify-lambda build express",
+        "build": "netlify-lambda build express"
     },
     "devDependencies": {},
     "dependencies": {
