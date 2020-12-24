@@ -51,7 +51,7 @@ router.get('/:id', generateMetadata);
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use('/.netlify/functions/metadata', router)
+app.use('/.netlify/functions/server', router)
 
 module.exports = app
 module.exports.handler = serverless(app);
