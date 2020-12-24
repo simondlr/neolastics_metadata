@@ -1,0 +1,9 @@
+{
+    "name": "neolastics-metadata",
+    "version": "0.1.0",
+    "devDependencies": {},
+    "dependencies": {
+        "ethers": "^5.0.24",
+        "express": "^4.17.1"
+    }
+}
