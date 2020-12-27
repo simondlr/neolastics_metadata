@@ -23,7 +23,7 @@ function generateStringSVGFromHash(hash) {
     palette.push("#00770F"); //green: rare 1/256 chance for a til
 
     const bytes = hexToBytes(hash.slice(2));
-    const svg = "<svg width='300' height='300'>"
+    const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>"
       + "<rect x='0' y='0' width='100' height='100' style='fill:"+palette[parseInt(bytes[0]/51)]+";stroke-width:3;stroke:black'/>" // tile 1
       + "<rect x='0' y='100' width='100' height='100' style='fill:"+palette[parseInt(bytes[1]/51)]+";stroke-width:3;stroke:black'/>" // tile 2
       + "<rect x='0' y='200' width='100' height='100' style='fill:"+palette[parseInt(bytes[2]/51)]+";stroke-width:3;stroke:black'/>" // tile 3
