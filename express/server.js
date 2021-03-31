@@ -83,7 +83,7 @@ function generateAttributesFromHash(hash) {
         attributes.push(trait);
     }
 
-    const total = {trait_type: "Amount of Colours", value: attributes.length };
+    const total = {trait_type: "Amount of Colours", value: attributes.length + " Colours" };
     attributes.push(total);
 
     return attributes;
