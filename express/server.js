@@ -75,7 +75,12 @@ function generateAttributesFromHash(hash) {
             case 4: textValue = 'Four'; break;
             case 5: textValue = 'Five'; break;
             case 6: textValue = 'Six'; break;
+            case 7: textValue = 'Seven'; break;
+            case 8: textValue = 'Eight'; break;
+            case 9: textValue = 'Nine'; break;
         }
+        // console.log(textValue);
+        // console.log(traits);
         const trait = { 
             "trait_type": traits[key].type,
             "value": textValue 
