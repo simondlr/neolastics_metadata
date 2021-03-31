@@ -4,6 +4,7 @@ const router = express.Router();
 const app = express();
 
 const { ethers } = require("ethers");
+const { text } = require('express');
 
 // MUST match JS + Solidity
 function hexToBytes(hex) {
@@ -66,9 +67,18 @@ function generateAttributesFromHash(hash) {
     }
 
     for (const key of Object.keys(traits)) {
+        let textValue;
+        switch (traits[key].value) {
+            case 1: textValue = 'One'; break;
+            case 2: textValue = 'Two'; break;
+            case 3: textValue = 'Three'; break;
+            case 4: textValue = 'Four'; break;
+            case 5: textValue = 'Five'; break;
+            case 6: textValue = 'Six'; break;
+        }
         const trait = { 
             "trait_type": traits[key].type,
-            "value": traits[key].value
+            "value": textValue 
         }
         attributes.push(trait);
     }
