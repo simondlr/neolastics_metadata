@@ -38,14 +38,59 @@ function generateStringSVGFromHash(hash) {
     return svg;
 }
 
+/*
+6 colours.
+Attributes:
+Trait Type: Amount of Colours.
+Values: [1,2,3,4,5,6]
+
+Trait Type: Red Tiles
+Values: Values: [1,2,3,4,5,6]
+
+...rest of the colours.
+*/
+function generateAttributesFromHash(hash) {
+    const bytes = hexToBytes(hash.slice(2));
+    const traits = {};
+    const attributes = [];
+
+    for(let i = 0; i<9; i+=1) {
+        const cnr = parseInt(bytes[i]/51);
+
+        if(cnr === 0) { if ('y' in traits) { traits.y.value += 1; } else { traits.y = { value: 1, type: "Yellow Tiles" }; }}
+        if(cnr === 1) { if ('b' in traits) { traits.b.value += 1; } else { traits.b = { value: 1, type: "Blue Tiles" }; }}
+        if(cnr === 2) { if ('r' in traits) { traits.r.value += 1; } else { traits.r = { value: 1, type: "Red Tiles" }; }}
+        if(cnr === 3) { if ('w' in traits) { traits.w.value += 1; } else { traits.w = { value: 1, type: "White Tiles" }; }}
+        if(cnr === 4) { if ('bl' in traits) { traits.bl.value += 1; } else { traits.bl = { value: 1, type: "Black Tiles" }; }}
+        if(cnr === 5) { if ('g' in traits) { traits.g.value += 1; } else { traits.g = { value: 1, type: "Green Tiles" }; }}
+    }
+
+    for (const key of Object.keys(traits)) {
+        const trait = { 
+            "trait_type": traits[key].type,
+            "value": traits[key].value
+        }
+        attributes.push(trait);
+    }
+
+    const total = {trait_type: "Amount of Colours", value: attributes.length };
+    attributes.push(total);
+
+    return attributes;
+
+}
+
 function generateMetadata(req, res) {
     const hash = ethers.BigNumber.from(req.params.id).toHexString();
     const truncated = hash.slice(0,20); // 0x + 9 bytes
     const svg = generateStringSVGFromHash(hash);
+    const attributes = generateAttributesFromHash(hash);
     return res.status(200).json({ 
         name: "Neolastic "+truncated,
         description: "Liquid On-Chain Generative Neo-Plastic Art",
-        image_data: svg })
+        image_data: svg,
+        attributes: attributes
+    })
 }
 
 router.get('/:id', generateMetadata);
@@ -56,3 +101,7 @@ app.use('/.netlify/functions/server', router)
 
 module.exports = app
 module.exports.handler = serverless(app);
+
+/*app.listen(3001, () => {
+    console.log(`Example app listening at http://localhost:3001`)
+});*/
